@@ -1,0 +1,33 @@
+=== Sweep 1: quorum 0.30 -> 0.95, seed 42 (only quorum changes) ===
+ quorum  need  commit@  events  validators
+    0.3     6        1     154  FAIL agreement  PASS validity  PASS no_conflict
+        tallies: 1:12/19C
+        !! consensus_agreement: round 1: committed with only 12/19 accepts
+    0.5    10        1     154  FAIL agreement  PASS validity  PASS no_conflict
+        tallies: 1:12/19C
+        !! consensus_agreement: round 1: committed with only 12/19 accepts
+    0.6    12        1     154  FAIL agreement  PASS validity  PASS no_conflict
+        tallies: 1:12/19C
+        !! consensus_agreement: round 1: committed with only 12/19 accepts
+  0.667    13        3     382  PASS agreement  PASS validity  PASS no_conflict
+        tallies: 1:12/19a,2:11/19a,3:13/19C
+    0.7    14        5     610  PASS agreement  PASS validity  PASS no_conflict
+        tallies: 1:12/19a,2:11/19a,3:13/19a,4:10/19a,5:15/19C
+   0.75    15        5     610  PASS agreement  PASS validity  PASS no_conflict
+        tallies: 1:12/19a,2:11/19a,3:13/19a,4:10/19a,5:15/19C
+    0.8    16        -     610  PASS agreement  PASS validity  PASS no_conflict
+        tallies: 1:12/19a,2:11/19a,3:13/19a,4:10/19a,5:15/19a
+    0.9    18        -     610  PASS agreement  PASS validity  PASS no_conflict
+        tallies: 1:12/19a,2:11/19a,3:13/19a,4:10/19a,5:15/19a
+   0.95    19        -     610  PASS agreement  PASS validity  PASS no_conflict
+        tallies: 1:12/19a,2:11/19a,3:13/19a,4:10/19a,5:15/19a
+
+=== Variable isolation ===
+baseline votes: 57   high-quorum votes: 95
+baseline vote sequence is a byte-identical prefix of high-quorum: True
+
+=== Sweep 2: 20 seeds each ===
+quorum=0.667: committed in 20/20 seeds; 0 zero-commit runs where all validators still PASS
+quorum=0.9: committed in 1/20 seeds; 19 zero-commit runs where all validators still PASS
+
+Scratch scenarios and traces are in traces/sweep/

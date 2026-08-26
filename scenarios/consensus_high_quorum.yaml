@@ -1,0 +1,49 @@
+# SPDX-License-Identifier: Apache-2.0
+# Consensus scenario: leader-based quorum voting.
+name: consensus_high_quorum
+description: "1 leader and 19 followers reaching agreement via quorum voting."
+
+tier: 1
+seed: 42
+
+agents:
+  count: 20
+  brain: state-machine
+  roles:
+    - name: leader
+      count: 1
+    - name: follower
+      count: 19
+
+layers:
+  transport: in_memory
+  comms: nest_native
+  identity: did_key
+  registry: in_memory
+  auth: jwt
+  trust: score_average
+  payments: prepaid_credits
+  coordination: contract_net
+  negotiation: alternating_offers
+  memory: blackboard
+  privacy: noop
+  datafacts: datafacts_v1
+
+task:
+  type: consensus
+  config:
+    rounds: 5
+    quorum: 0.90
+
+failures:
+  message_drop: 0.0
+
+duration: "ticks: 10000"
+
+metrics:
+  - success_rate
+  - message_count
+  - agent_count
+
+output:
+  trace: ./traces/consensus_high_quorum.jsonl
